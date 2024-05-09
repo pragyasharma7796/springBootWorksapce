@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=restcrud/src\/main\/java&lt;com.app.demo.service{StudentService.java[StudentService" modifiers="513" timestamp="1652696050910"/>
+    <typeInfo handle="=myproject/src\/main\/java&lt;com.app.demo.service{CategoryService.java[CategoryService" modifiers="513" timestamp="1653560510450"/>
+    <typeInfo handle="=myproject/src\/main\/java&lt;com.app.demo.service{WareHouseService.java[WareHouseService" modifiers="513" timestamp="1653716218291"/>
+    <typeInfo handle="=myproject/src\/main\/java&lt;com.app.demo.service{ProductService.java[ProductService" modifiers="513" timestamp="1653720272253"/>
+    <typeInfo handle="=myproject/src\/main\/java&lt;com.app.demo.dao{ProductDao.java[ProductDao" modifiers="513" timestamp="1653720061196"/>
+    <typeInfo handle="=myproject/src\/main\/java&lt;com.app.demo.service{SubCategoryService.java[SubCategoryService" modifiers="513" timestamp="1653731203024"/>
+    <typeInfo handle="=myproject/src\/main\/java&lt;com.app.demo.service{SellerService.java[SellerService" modifiers="513" timestamp="1654181915732"/>
+    <typeInfo handle="=sendmailbysmtp/src\/main\/java&lt;com.app.sendmailbysmtp.service{EmailService.java[EmailService" modifiers="513" timestamp="1671781926992"/>
+    <typeInfo handle="=eshop/C:\/Users\/mayan\/.m2\/repository\/org\/springframework\/spring-jdbc\/5.3.24\/spring-jdbc-5.3.24.jar&lt;org.springframework.jdbc.core(RowMapper.class[RowMapper" modifiers="1537" timestamp="1670386157049"/>
+    <typeInfo handle="=firstSpringBoot/C:\/Users\/mayan\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.7.6\/spring-data-jpa-2.7.6.jar&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1670386158878"/>
+</typeInfoHistroy>

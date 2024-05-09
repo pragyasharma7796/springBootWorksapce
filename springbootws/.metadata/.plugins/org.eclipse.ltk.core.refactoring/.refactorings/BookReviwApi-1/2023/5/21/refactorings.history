@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;User.java&apos; to &apos;firstpostgrsqlproject/src/main/java/com.app.firstpostgrsqlproject.entity&apos;&#x0D;&#x0A;- Original project: &apos;BookReviwApi-1&apos;&#x0D;&#x0A;- Destination element: &apos;firstpostgrsqlproject/src/main/java/com.app.firstpostgrsqlproject.entity&apos;&#x0D;&#x0A;- Original element: &apos;com.app.demo.entity.User.java&apos;" description="Copy compilation unit" destination="=firstpostgrsqlproject/src\/main\/java&lt;com.app.firstpostgrsqlproject.entity" element1="/src\/main\/java&lt;com.app.demo.entity{User.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1685014332375" units="1" version="1.0"/>
+</session>

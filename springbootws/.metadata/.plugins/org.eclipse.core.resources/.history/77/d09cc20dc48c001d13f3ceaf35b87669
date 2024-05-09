@@ -1,0 +1,123 @@
+package com.app.eshop.service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
+import com.app.eshop.controller.VestingController;
+import com.app.eshop.dto.VsetingDto;
+import com.app.eshop.entity.Allocation;
+import com.app.eshop.entity.Grant;
+import com.app.eshop.entity.Plan;
+import com.app.eshop.repository.AllocationRepository;
+
+@Service
+public class AllocationService {
+	@Autowired
+	private PlanService planService;
+	@Autowired
+	private GrantService grantService;
+	@Autowired
+	private AllocationRepository allocationRerpository;
+
+	@Scheduled(cron = "3 * * ? * *")
+	public void init() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// System.out.println("hello");
+				prepareAndProcessAllocation();
+			}
+		}).start();
+	}
+
+	public void prepareAndProcessAllocation() {
+		Plan plan = planService.getCurrentPlan();
+		if (plan != null) {
+			Optional<List<Grant>> grants = grantService.getGrantsForAllocationById(plan.getId());
+			List<Allocation> allocations = new ArrayList<>();
+			if (grants.isPresent()) {
+				for (Grant grant : grants.get()) {
+					if (grant.getAllocation().equals("open") && grant.getGrantStatus().equals("approve")) {
+						prepareAllocation(grant, allocations);
+						
+					}
+				}
+			}
+
+			allocationRerpository.saveAll(allocations);
+
+		}
+	}
+
+	public void prepareAllocation(Grant grant, List<Allocation> allocations) {
+
+		Double numberofAllocation = grant.getNumberOfGrant() * 1.0 / grant.getFrequency();
+		Long frequency = null;
+	
+		if ( grant.getFrequency() > 0 && grant.getFrequency() < 6) {
+			frequency = grant.getFrequency();
+		}
+		else if(grant.getBand() < 6){
+			frequency = 5l;
+		}
+		else {
+			
+		}
+		if(frequency != null) {
+			LocalDate date = LocalDate.now();
+			
+			Long year = LocalDate.now().getYear() + grant.getFrequency();
+			for (int i = 0; i < frequency; i++) {
+				Allocation allocation = new Allocation();
+				allocation.setAllocationStatus("pending");
+				allocation.setGrantId(grant.getId());
+				allocation.setNumberOfAllocation(numberofAllocation);
+				date = date.plusYears(1);
+				allocation.setPlannedAllocationDate(date);
+				allocation.setAllocationYear(year);
+				allocations.add(allocation);
+
+			}
+			grantService.updateGrant(grant);
+		}
+		
+	}
+	public void approveAllocation(List<Long> allocationIdList) {
+		allocationIdList.forEach(e -> {
+			Allocation allocation = allocationRerpository.findById(e).get();
+			allocation.setActualAllocationDate(LocalDate.now());
+			allocation.setAllocationStatus("allocated");
+			allocationRerpository.save(allocation);
+		});
+	}
+	
+	public Object vestinization(VsetingDto dto) {
+		List<Object> ol = new ArrayList<>();
+		Plan plan = planService.getPlanById(dto.getPlanId());
+		if(plan != null) {
+			plan.setVestingFactor(dto.getVestingFactor());
+			plan.setVestedDate(LocalDate.now().toString());
+			planService.updatePlan(plan);
+			Optional<List<Grant>> grants = grantService.getGrantsForAllocationById(plan.getId());
+			if(grants.isPresent()) {
+				grants.get().forEach(grant -> {
+					//List<Allocation> allocations = AllocationService.
+					
+				});
+			}
+		}
+		
+		return ol;
+	}
+	
+	public Optional<List<Allocation>> getAllocationListByGrantId(Long grantId){
+		return  null;
+	}
+}
